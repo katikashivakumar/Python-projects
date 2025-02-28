@@ -1,0 +1,123 @@
+def onestarhotel():
+    print(" onestarhotel  package is 2 k per room")
+    print(" IN A ONE-STARHOTEL ROOMS, ONLY FOUR MEMBERS ARE ALLOWED. PLEASE BOOK YOUR ACCOMMODATION ACCORDINGLY. ")
+    var=input(" do you want to book this room: ")
+    if var == "yes":
+        per_room=2000
+        fullname=input("enter you full name: ")
+        age=int(input("enter your age: "))
+        gender=input("enter your gender(male/female/other): ")
+        persons=int(input("enter numbers of persons: "))
+        mobilenumber=int(input ("enter your moblie number: "))
+        number_of_rooms=int(input("enter number of rooms: "))
+        total_amount=per_room*number_of_rooms
+        if total_amount>=6000:
+            offer_total_amount=total_amount-600
+            print(f" hi {fullname} you're booked a one star hotel room your bill is more than 6k so 600 less and you have to pay total amount is {offer_total_amount}")
+        print(f" hi {fullname} you're booked roomin one star hotel and you have to pay total amount is {total_amount}")
+    
+    else:
+        print("thank you")
+
+def threestarhotel ():
+    print(" threestar  package is 2 k per room")
+    print(" IN A THREE-STAR HOTEL ROOMS, ONLY FOUR MEMBERS ARE ALLOWED. PLEASE BOOK YOUR ACCOMMODATION ACCORDINGLY. ")
+    var=input(" do you want to book this room: ")
+    if var == "yes":
+        per_room=3000
+        fullname=input("enter you full name: ")
+        age=int(input("enter your age: "))
+        gender=input("enter your gender(male/female/other): ")
+        persons=int(input("enter numbers of persons: "))
+        mobilenumber=int(input ("enter your moblie number: "))
+        number_of_rooms=int(input("enter number of rooms: "))
+        total_amount=per_room*number_of_rooms
+        if total_amount>=8000:
+            offer_total_amount=total_amount-1000
+            print(f" hi {fullname} you're booked a three star hotel room your bill is more than 8k so 1000 less and you have to pay total amount is {offer_total_amount}")
+        print(f" hi {fullname} you're booked room in three star hotel and you have to pay total amount is {total_amount}")
+    else:
+        print("thank you")
+
+
+def fivestarhotel():
+     print(" fivestar  package is 4 k per room")
+     print(" IN A FIVE-STAR HOTEL ROOMS, ONLY FIVE MEMBERS ARE ALLOWED. PLEASE BOOK YOUR ACCOMMODATION ACCORDINGLY. ")
+     var=input(" do you want to book this room: ")
+     if var == "yes":
+        per_room=3500
+        fullname=input("enter you full name: ")
+        age=int(input("enter your age: "))
+        gender=input("enter your gender(male/female/other): ")
+        persons=int(input("enter numbers of persons: "))
+        mobilenumber=int(input ("enter your moblie number: "))
+        number_of_rooms=int(input("enter number of rooms: "))
+        total_amount=per_room*number_of_rooms
+        if total_amount>=9000:
+            offer_total_amount=total_amount-1200
+            print(f" hi {fullname} you're booked a five star hotel room your bill is more than 9k so 1200 less and you have to pay total amount is {offer_total_amount}")
+        print(f" hi {fullname} you're booked room in five star hotel and you have to pay total amount is {total_amount}")
+     else:
+        print("thank you")
+
+def sevenstarhotel():
+     print(" sevenstar  package is 4 k per room")
+     print(" IN A SEVEN-STAR HOTEL ROOMS, ONLY SIX MEMBERS ARE ALLOWED. PLEASE BOOK YOUR ACCOMMODATION ACCORDINGLY. ")
+     var=input(" do you want to book this room: ")
+     if var == "yes":
+        per_room=4000
+        fullname=input("enter you full name: ")
+        age=int(input("enter your age: "))
+        gender=input("enter your gender(male/female/other): ")
+        persons=int(input("enter numbers of persons: "))
+        mobilenumber=int(input ("enter your moblie number: "))
+        number_of_rooms=int(input("enter number of rooms: "))
+        total_amount=per_room*number_of_rooms
+        if total_amount>=12000:
+            offer_total_amount=total_amount-1500
+            print(f" hi {fullname} you're booked a sevenstar hotel room your bill is more than 12k so 1500 less and you have to pay total amount is {offer_total_amount}")
+        print(f" hi {fullname} you're booked roomin sevenstar hotel and you have to pay total amount is {total_amount}")
+     else:
+        print("thank you")
+
+def alphahotel():
+     print(" alphahotel  package is 1k per room")
+     print(" IN A ALPHAHOTEL ROOMS, ONLY TWO MEMBERS ARE ALLOWED. PLEASE BOOK YOUR ACCOMMODATION ACCORDINGLY. ")
+     var=input(" do you want to book this room: ")
+     if var == "yes":
+        per_hour=300
+        fullname=input("enter you full name: ")
+        age=int(input("enter your age: "))
+        gender=input("enter your gender(male/female/other): ")
+        persons=int(input("enter numbers of persons: "))
+        mobilenumber=int(input ("enter your moblie number: "))
+        number_of_hours=int(input("enter number of hours: "))
+        total_amount=per_hour*number_of_hours
+        if total_amount>=2000:
+            offer_total_amount=total_amount-200
+            print(f" hi {fullname} you're booked a alpha  hotel room your bill is more than 2k so 200 less and you have to pay total amount is {offer_total_amount}")
+        print(f" hi {fullname} you're booked room in alpha hotel and you have to pay total amount is {total_amount}")
+     else:
+        print("thank you")
+
+def main():
+    print("***welcome to luxury rooms and hotels***")
+    print("1.onestarhotel")
+    print("2.threestarhotel")
+    print("3.fivestarhotel")
+    print("4.sevenstarhotel")
+    print("5.alphahotel")
+    choose_number=int(input("enter your choise; "))
+    if choose_number == 1:
+        onestarhotel()
+    elif choose_number == 2:
+        threestarhotel()
+    elif choose_number == 3:
+        fivestarhotel()
+    elif choose_number == 4:
+        sevenstarhotel()
+    elif choose_number == 5:
+        alphahotel()
+    else:
+        print("invalid choice")
+main()
