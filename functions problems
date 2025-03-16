@@ -1,0 +1,65 @@
+#lambda funtions
+#map funtions
+#fliter funtions
+print("lambda funtions:")
+print("example 1")
+total=lambda mango,apple,banana:mango+apple+banana
+print(total(100,40,80))
+print("example 2")
+total=lambda a,b,c:a+b+c
+print(total(2,4,6))
+print("example 3")
+total=lambda pen,book,pencil:pen+book+pencil
+print(total(5,20,15))
+print("example 4")
+total=lambda a,b:a+b
+print(total(6,12))
+print("example 5")
+total=lambda h,k,v,i:h+k+v+i
+print(total(7,14,11,28))
+ 
+#map funtions:
+print("map funtions:")
+print("example 1")
+numbers=[1,2,3,4,5,6]
+squared_number=list(map(lambda s:s**1,numbers))
+print(squared_number)
+print("example 2")
+numbers=[2,4,6,8,10]
+squared_number=list(map(lambda h:h**2,numbers))
+print(squared_number)
+print("example 3")
+numbers=[3,6,9,12,15]
+squared_number=list(map(lambda i:i**3,numbers))
+print(squared_number)
+print("example 4")
+numbers=[4,8,12,16,20]
+squared_number=list(map(lambda v:v**4,numbers))
+print(squared_number)
+print("example 5")
+numbers=[5,10,15,20,25]
+squared_number=list(map(lambda a:a**5,numbers))
+print(squared_number)
+
+#filter funtions:
+print("filter funtions:")
+print("example 1")
+numbers=[1,2,3,4,5,6,7,8,9]
+even_numbers=list(filter(lambda x:x%2==0,numbers))
+print(even_numbers)
+print("example 2")
+numbers=[1,2,3,4,5,6,7,8,9]
+odd_numbers=list(filter(lambda x:x% 2 !=0,numbers))
+print(odd_numbers)
+print("example 3")
+numbers = [2, 5, 8, 9,11,12]
+filtered_numbers = list(filter(lambda x: x + 2 > 10, numbers))
+print(filtered_numbers)  
+print("example 4")
+numbers = [(2, 5), (10, 3), (4, 8), (7, 1)]
+filtered_numbers = list(filter(lambda pair: pair[0] > pair[1], numbers))
+print(filtered_numbers)  # Output: [(10, 3), (4, 8)]
+print("example 5")
+numbers = [2, 4, 6, 8]
+filtered_numbers = list(filter(lambda i: i + 4 > 8, numbers))
+print(filtered_numbers)
