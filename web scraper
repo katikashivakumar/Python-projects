@@ -1,0 +1,71 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+def scrape_data(url, data_type):
+    # List to store scraped data
+    data = []
+
+    while url:
+        # Send GET request to the URL
+        response = requests.get(url)
+        if response.status_code != 200:
+            print(f"Failed to retrieve data from {url}. HTTP Status Code: {response.status_code}")
+            break
+
+        # Parse the HTML content
+        soup = BeautifulSoup(response.content, "html.parser")
+
+        # Extract data based on the specified type
+        if data_type == "headlines":
+            headlines = soup.find_all("h2")  # Adjust tag/class as needed
+            data.extend([headline.get_text(strip=True) for headline in headlines])
+        elif data_type == "product details":
+            products = soup.find_all("div", class_="product")  # Adjust tag/class as needed
+            for product in products:
+                name = product.find("h3").get_text(strip=True) if product.find("h3") else "N/A"
+                price = product.find("span", class_="price").get_text(strip=True) if product.find("span", class_="price") else "N/A"
+                data.append({"Product": name, "Price": price})
+        elif data_type == "job listings":
+            jobs = soup.find_all("div", class_="job-listing")  # Adjust tag/class as needed
+            for job in jobs:
+                title = job.find("h3").get_text(strip=True) if job.find("h3") else "N/A"
+                company = job.find("span", class_="company").get_text(strip=True) if job.find("span", class_="company") else "N/A"
+                data.append({"Job Title": title, "Company": company})
+        
+        # Handle pagination (adjust based on the website)
+        next_page = soup.find("a", class_="next")
+        url = next_page["href"] if next_page else None
+
+    return data
+
+def save_to_csv(data, filename="output.csv"):
+    if isinstance(data, list) and data and isinstance(data[0], dict):
+        # Save structured data (list of dictionaries) to CSV
+        df = pd.DataFrame(data)
+        df.to_csv(filename, index=False)
+    elif isinstance(data, list):
+        # Save flat list data to CSV
+        df = pd.DataFrame(data, columns=["Data"])
+        df.to_csv(filename, index=False)
+    print(f"Data saved to {filename}")
+
+def main():
+    # User input for URL and data type
+    url = input("Enter the URL to scrape: ").strip()
+    data_type = input("Enter the type of data to scrape (headlines, product details, job listings): ").strip().lower()
+
+    print("Scraping data, please wait...")
+    # Call the scrape_data function
+    scraped_data = scrape_data(url, data_type)
+
+    if not scraped_data:
+        print("No data found. Please check the URL or data type and try again.")
+        return
+
+    # Save the data to a CSV file
+    filename = input("Enter the filename to save the data (e.g., data.csv): ").strip()
+    save_to_csv(scraped_data, filename)
+
+if __name__ == "__main__":
+    main()
