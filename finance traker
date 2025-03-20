@@ -1,0 +1,100 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+class FinanceManager:
+    def __init__(self):
+        # Initialize data storage
+        self.data = pd.DataFrame(columns=["Category", "Type", "Amount"])
+
+    def add_transaction(self, category, txn_type, amount):
+        # Standardize transaction type and validate input
+        txn_type = txn_type.lower()
+        if txn_type not in ["income", "expense"]:
+            print("Invalid transaction type. Please enter 'Income' or 'Expense'.")
+            return
+
+        if amount <= 0:
+            print("Amount must be greater than zero.")
+            return
+
+        new_entry = {"Category": category, "Type": txn_type, "Amount": amount}
+        self.data = pd.concat([self.data, pd.DataFrame([new_entry])], ignore_index=True)
+        print("Transaction added successfully.")
+
+    def set_budget_goal(self, category, goal_amount):
+        # Set budget goal for a category
+        if goal_amount <= 0:
+            print("Budget goal must be greater than zero.")
+            return
+
+        self.data.loc[self.data["Category"] == category, "Budget Goal"] = goal_amount
+        print(f"Budget goal for '{category}' set to ₹{goal_amount}.")
+
+    def generate_report(self):
+        # Generate spending report
+        grouped = self.data.groupby(["Category", "Type"])["Amount"].sum()
+        print("\n--- Spending Report ---")
+        print(grouped)
+
+    def visualize_spending(self):
+        # Create a spending chart
+        expense_data = self.data[self.data["Type"].str.lower() == "expense"]
+        if expense_data.empty:
+            print("No valid expense data available for visualization. Please add some expense transactions.")
+            return
+
+        category_totals = expense_data.groupby("Category")["Amount"].sum()
+        category_totals.plot(kind="bar", title="Spending by Category", color="teal")
+        plt.xlabel("Category")
+        plt.ylabel("Amount (₹)")
+        plt.show()
+
+    def export_to_csv(self, filename="financial_data.csv"):
+        # Save data to CSV
+        self.data.to_csv(filename, index=False)
+        print(f"Data exported to {filename}")
+
+def main():
+    manager = FinanceManager()
+
+    while True:
+        print("\n--- Finance Manager ---")
+        print("1. Add Transaction")
+        print("2. Set Budget Goal")
+        print("3. Generate Report")
+        print("4. Visualize Spending")
+        print("5. Export to CSV")
+        print("6. Exit")
+        choice = input("Enter your choice (1-6): ")
+
+        if choice == '1':
+            category = input("Enter category (e.g., Rent, Groceries, Entertainment): ")
+            txn_type = input("Enter transaction type (Income/Expense): ")
+            try:
+                amount = float(input("Enter amount (₹): "))
+                manager.add_transaction(category, txn_type, amount)
+            except ValueError:
+                print("Invalid amount. Please enter a numeric value.")
+        elif choice == '2':
+            category = input("Enter category to set budget goal for: ")
+            try:
+                goal_amount = float(input("Enter budget goal (₹): "))
+                manager.set_budget_goal(category, goal_amount)
+            except ValueError:
+                print("Invalid budget goal. Please enter a numeric value.")
+        elif choice == '3':
+            manager.generate_report()
+        elif choice == '4':
+            manager.visualize_spending()
+        elif choice == '5':
+            filename = input("Enter filename to export data (e.g., data.csv): ")
+            manager.export_to_csv(filename)
+        elif choice == '6':
+            print("Exiting... Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
